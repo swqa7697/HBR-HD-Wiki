@@ -1,0 +1,19 @@
+{
+  "envId": "hbr-hd-wiki-4gs4lcav374d67ea",
+  "framework": {
+    "name": "react",
+    "plugins": {
+      "static": {
+        "src": "./dist",
+        "cloudPath": "/",
+        "ignore": [".git/", ".github/", "node_modules/", "cloudbaserc.js"],
+        "rewrites": [
+          {
+            "source": "/**",
+            "destination": "/index.html"
+          }
+        ]
+      }
+    }
+  }
+}
