@@ -7,7 +7,7 @@ function Root() {
       {/* Header */}
       <div className="relative min-w-[880px] max-w-[2200px] min-h-[105px] max-h-[120px] h-1/6 overflow-hidden z-10">
         <img
-          src="src/assets/Banner.webp"
+          src="assets/Banner.webp"
           alt="Banner"
           className="w-full h-full object-cover pointer-events-none select-none"
           draggable="false"
@@ -18,19 +18,19 @@ function Root() {
       {/* 立绘 */}
       <div className="absolute h-screen w-screen overflow-hidden z-0">
         <img
-          src="src/assets/Hiiragi.webp"
+          src="assets/Hiiragi.webp"
           className="absolute top-[28%] left-[6.25%] h-full min-h-[650px] max-h-[1000px] -translate-x-1/2"
           draggable="false"
         />
         <img
-          src="src/assets/Kiryu.webp"
+          src="assets/Kiryu.webp"
           className="absolute top-[28%] right-[4.2%] h-full min-h-[650px] max-h-[1000px] translate-x-1/2"
           draggable="false"
         />
       </div>
 
       {/* Main contents */}
-      <div className="flex flex-col items-center w-full h-full bg-[url('src/assets/Bg.avif')] bg-cover bg-center">
+      <div className="flex flex-col items-center w-full h-full bg-[url('assets/Bg.avif')] bg-cover bg-center">
         <div className="w-full z-20">
           <TopNav />
         </div>
