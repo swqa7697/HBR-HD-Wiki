@@ -1,9 +1,10 @@
 {
   "envId": "hbr-hd-wiki-4gs4lcav374d67ea",
   "framework": {
-    "name": "react",
+    "name": "hbrwiki",
     "plugins": {
       "static": {
+        "use": "@cloudbase/framework-plugin-website",
         "src": "./dist",
         "cloudPath": "/",
         "ignore": [".git/", ".github/", "node_modules/", "cloudbaserc.js"],
