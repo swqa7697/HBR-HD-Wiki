@@ -1,5 +1,6 @@
 import { Outlet } from 'react-router';
 import { TopNav } from '../components/TopNav';
+import Bg from '../../public/assets/Bg.avif';
 
 function Root() {
   return (
@@ -30,7 +31,10 @@ function Root() {
       </div>
 
       {/* Main contents */}
-      <div className="flex flex-col items-center w-full h-full bg-[url('assets/Bg.avif')] bg-cover bg-center">
+      <div
+        className="flex flex-col items-center w-full h-full bg-cover bg-center"
+        style={{ backgroundImage: `url(${Bg})` }}
+      >
         <div className="w-full z-20">
           <TopNav />
         </div>
