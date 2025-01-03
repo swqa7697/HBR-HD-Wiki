@@ -24,7 +24,7 @@ function Root() {
         />
         <img
           src="assets/Kiryu.webp"
-          className="absolute top-[28%] right-[4.2%] h-full min-h-[650px] max-h-[1000px] translate-x-1/2"
+          className="absolute top-[26%] right-[5.5%] h-full min-h-[650px] max-h-[1000px] translate-x-1/2"
           draggable="false"
         />
       </div>
