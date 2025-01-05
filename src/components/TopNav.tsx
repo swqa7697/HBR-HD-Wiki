@@ -36,7 +36,7 @@ export const TopNav = () => {
     <Navbar fluid theme={customNavBarTheme}>
       <Navbar.Brand>
         <img
-          src="assets/logo.webp"
+          src="/assets/logo.webp"
           alt="Logo"
           draggable="false"
           className="h-10 pointer-events-none select-none text-white"
