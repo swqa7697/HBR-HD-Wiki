@@ -39,7 +39,7 @@ function Root() {
         <div className="w-full z-20">
           <TopNav />
         </div>
-        <div className="flex-1 w-full md:w-3/4 bg-slate-100 pb-40 overflow-y-auto scrollbar-hide z-20">
+        <div className="flex-1 w-full md:w-3/4 bg-slate-100/85 pb-40 overflow-y-auto scrollbar-hide z-20">
           <Outlet />
         </div>
       </div>
