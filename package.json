@@ -1,8 +1,8 @@
 {
   "name": "hbr-hd-wiki",
   "private": true,
-  "version": "0.0.0",
-  "type": "commonjs",
+  "version": "0.1.0",
+  "type": "module",
   "scripts": {
     "dev": "vite --host",
     "build": "tsc -b && vite build",
