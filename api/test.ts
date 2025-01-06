@@ -3,7 +3,7 @@ export async function POST(request: Request) {
     const { val = 'No Value' } = await request.json();
     return new Response(
       JSON.stringify({
-        val,
+        Val: val,
         Method: request.method,
       }),
       {
