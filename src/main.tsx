@@ -8,6 +8,7 @@ import GachaHistory from './routes/gachaHistory';
 import ScoreRecords from './routes/scoreRecords';
 import ClockTowerSolutions from './routes/clockTowerSolutions';
 import HardBossSolutions from './routes/hardBossSolutions';
+import NotFound from './routes/notFound';
 
 import './index.css';
 
@@ -22,6 +23,7 @@ createRoot(document.getElementById('root')!).render(
           <Route path="clock-tower" element={<ClockTowerSolutions />} />
           <Route path="hard" element={<HardBossSolutions />} />
         </Route>
+        <Route path="*" element={<NotFound />} />
       </Routes>
     </BrowserRouter>
   </StrictMode>,

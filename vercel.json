@@ -1,4 +1,17 @@
 {
+  "redirects": [
+    {
+      "source": "/:path((?!api).*)",
+      "has": [
+        {
+          "type": "host",
+          "value": "!wiki.hbr-hd.com"
+        }
+      ],
+      "destination": "/not-found",
+      "statusCode": 404
+    }
+  ],
   "rewrites": [
     {
       "source": "/(.*)",

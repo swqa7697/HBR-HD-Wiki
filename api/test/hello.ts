@@ -1,4 +1,4 @@
-export async function GET(request: Request) {
+export const GET = async (request: Request) => {
   const url = new URL(request.url);
   const name = url.searchParams.get('name') ?? 'World';
   return new Response(
@@ -14,9 +14,9 @@ export async function GET(request: Request) {
       },
     },
   );
-}
+};
 
-export async function POST(request: Request) {
+export const POST = async (request: Request) => {
   return new Response(
     JSON.stringify({
       Message: 'Hello World',
@@ -30,4 +30,4 @@ export async function POST(request: Request) {
       },
     },
   );
-}
+};
