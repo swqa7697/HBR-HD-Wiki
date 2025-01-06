@@ -1,10 +1,10 @@
-export async function POST(request: Request) {
+export const POST = async (req: Request) => {
   try {
-    const { val = 'No Value' } = await request.json();
+    const { val = 'No Value' } = await req.json();
     return new Response(
       JSON.stringify({
         Val: val,
-        Method: request.method,
+        Method: req.method,
       }),
       {
         status: 200,
@@ -27,4 +27,4 @@ export async function POST(request: Request) {
       },
     );
   }
-}
+};
