@@ -1,16 +1,20 @@
 import type { VercelRequest, VercelResponse } from '@vercel/node';
 
-export default async function (req: VercelRequest, res: VercelResponse) {
-  const method = req.method;
+export const config = {
+  runtime: 'nodejs',
+};
+
+export default function (request: VercelRequest, response: VercelResponse) {
+  const method = request.method;
 
   switch (method) {
     case 'GET': {
-      const { name = 'World' } = req.query;
-      res.status(200).json({ message: `Hello ${name}!` });
+      const { name = 'World' } = request.query;
+      response.status(200).json({ message: `Hello ${name}!` });
       break;
     }
     default: {
-      res.status(405).json({ message: `Method ${method} Not Allowed` });
+      response.status(405).json({ message: `Method ${method} Not Allowed` });
       break;
     }
   }
