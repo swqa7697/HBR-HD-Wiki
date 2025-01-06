@@ -1,6 +1,6 @@
 import { Outlet } from 'react-router';
 import { TopNav } from '../components/TopNav';
-import Bg from '../../public/assets/Bg.avif';
+import Bg from '../Bg.avif';
 
 function Root() {
   return (
