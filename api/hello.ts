@@ -1,4 +1,4 @@
-export const GET = (request: Request) => {
+export function GET(request: Request) {
   const url = new URL(request.url);
   const name = url.searchParams.get('name') ?? 'World';
   return new Response(
@@ -12,4 +12,4 @@ export const GET = (request: Request) => {
       },
     },
   );
-};
+}
