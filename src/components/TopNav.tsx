@@ -35,12 +35,14 @@ export const TopNav = () => {
   return (
     <Navbar fluid theme={customNavBarTheme}>
       <Navbar.Brand>
-        <img
-          src="/assets/logo.webp"
-          alt="Logo"
-          draggable="false"
-          className="h-10 pointer-events-none select-none text-white"
-        />
+        <div className="relative w-16 h-10 pointer-events-none select-none text-white">
+          <img
+            src="/assets/stickers/2/499421868_key@2x.png"
+            alt="Logo"
+            draggable="false"
+            className="absolute w-full h-auto -translate-y-1/2 top-[14px]"
+          />
+        </div>
       </Navbar.Brand>
       <Navbar.Toggle />
       <Navbar.Collapse>
