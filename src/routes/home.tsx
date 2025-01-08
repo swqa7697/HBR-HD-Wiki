@@ -26,7 +26,7 @@ function Home() {
   return (
     <div className="flex flex-1 md:flex-wrap w-full p-5 items-center justify-start flex-col md:flex-row gap-5">
       {/* 资讯卡片 */}
-      <CardImg_H imgSrc="/assets/stickers/1/499421694_key@2x.png">
+      <CardImg_H imgSrc="/assets/stickers/1/499421694@2x.avif">
         <p className="text-3xl">高难Wiki网页版上线啦!</p>
         <p className="text-2xl">
           地址:{' '}
@@ -43,7 +43,7 @@ function Home() {
       </CardImg_H>
 
       {/* 站内实用工具 */}
-      <CardImg_H imgSrc="/assets/stickers/2/499421853_key@2x.png">
+      <CardImg_H imgSrc="/assets/stickers/2/499421853@2x.avif">
         <div className="flex flex-col items-center text-2xl gap-1">
           <p className="font-bold mb-2">站内实用工具</p>
           <Tooltip content="文档版（网页版开发中）">
@@ -83,7 +83,7 @@ function Home() {
       </CardImg_H>
 
       {/* 外部链接 */}
-      <CardImg_H imgSrc="/assets/stickers/2/499421865_key@2x.png">
+      <CardImg_H imgSrc="/assets/stickers/2/499421865@2x.avif">
         <div className="flex flex-col items-center text-2xl gap-1">
           <p className="font-bold mb-2">外部链接</p>
           {externalSites.map((site, idx) => (

@@ -37,7 +37,7 @@ export const TopNav = () => {
       <Navbar.Brand>
         <div className="flex relative w-16 h-10 pointer-events-none select-none text-white">
           <img
-            src="/assets/stickers/2/499421868_key@2x.png"
+            src="/assets/stickers/2/499421868@2x.avif"
             alt="Logo"
             draggable="false"
             className="absolute w-full h-auto -translate-y-1/2 top-[14px]"
