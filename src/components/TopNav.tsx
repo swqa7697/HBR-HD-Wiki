@@ -11,7 +11,7 @@ const routes = [
 
 const customNavBarTheme: CustomFlowbiteTheme['navbar'] = {
   root: {
-    base: 'bg-pink-800 px-2 py-2 sm:px-4',
+    base: 'bg-pink-800 px-2 py-2 sm:px-4 lg:px-32',
   },
   collapse: {
     list: 'mt-4 flex flex-col md:mt-0 md:flex-row md:space-x-8',
@@ -35,13 +35,14 @@ export const TopNav = () => {
   return (
     <Navbar fluid theme={customNavBarTheme}>
       <Navbar.Brand>
-        <div className="relative w-16 h-10 pointer-events-none select-none text-white">
+        <div className="flex relative w-16 h-10 pointer-events-none select-none text-white">
           <img
             src="/assets/stickers/2/499421868_key@2x.png"
             alt="Logo"
             draggable="false"
             className="absolute w-full h-auto -translate-y-1/2 top-[14px]"
           />
+          <div className="absolute inset-0 bg-transparent" />
         </div>
       </Navbar.Brand>
       <Navbar.Toggle />
