@@ -11,4 +11,4 @@ export const navRoutes: RouteListItem[] = [
   { path: '/hard', name: '异时层解法' },
 ];
 
-export const fullRoutes: RouteListItem[] = [...navRoutes];
+export const sitemapRoutes: RouteListItem[] = [...navRoutes.slice(1)];
