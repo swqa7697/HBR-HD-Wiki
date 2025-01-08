@@ -11,7 +11,6 @@ export default defineConfig({
       hostname: 'https://wiki.hbr-hd.com',
       dynamicRoutes: sitemapRoutes.map((route) => route.path),
       changefreq: 'monthly',
-      priority: undefined,
       exclude: ['/api'],
     }),
   ],
