@@ -1,3 +1,0 @@
-User-agent: *
-Allow: /
-Sitemap: https://wiki.hbr-hd.com/sitemap.xml

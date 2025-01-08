@@ -1,13 +1,6 @@
 import { CustomFlowbiteTheme, Navbar } from 'flowbite-react';
 import { Link, useLocation } from 'react-router';
-
-const routes = [
-  { title: '主页', path: '/' },
-  { title: '历史卡池', path: '/gacha-history' },
-  { title: '打分顶分记录', path: '/score-attack' },
-  { title: 'Hell钟楼解法', path: '/clock-tower' },
-  { title: '异时层解法', path: '/hard' },
-];
+import { navRoutes } from '../util/site-routes';
 
 const customNavBarTheme: CustomFlowbiteTheme['navbar'] = {
   root: {
@@ -47,14 +40,14 @@ export const TopNav = () => {
       </Navbar.Brand>
       <Navbar.Toggle />
       <Navbar.Collapse>
-        {routes.map((route, idx) => (
+        {navRoutes.map((route, idx) => (
           <Navbar.Link
             key={idx}
             as={Link}
             to={route.path}
             active={location.pathname === route.path}
           >
-            {route.title}
+            {route.name}
           </Navbar.Link>
         ))}
       </Navbar.Collapse>
