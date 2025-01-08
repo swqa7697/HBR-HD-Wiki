@@ -14,10 +14,12 @@ export const CardImg_H: FC<CardImg_H_props> = ({ imgSrc, children }) => {
           <div className="absolute inset-0 bg-transparent" />
         </div>
       )}
-      className="max-w-sm bg-gradient-to-br from-pink-800/75 from-40% to-pink-800/25 border-0 border-pink-800 hover:shadow-lg"
+      className="max-w-sm bg-gradient-to-tl from-pink-800/75 from-40% to-pink-800/30 border-0 hover:shadow-lg"
       horizontal
     >
-      {children}
+      <div className="text-white [text-shadow:1px_1px_2px_black]">
+        {children}
+      </div>
     </Card>
   );
 };

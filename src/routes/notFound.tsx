@@ -6,7 +6,7 @@ function NotFound() {
   }, []);
 
   return (
-    <div className="h-screen w-screen bg-[url('./Bg.avif')] bg-center bg-cover">
+    <div className="h-screen w-screen bg-[url('/assets/root/Bg.avif')] bg-center bg-cover">
       <div className="flex h-full w-full items-center justify-center bg-black bg-opacity-80">
         <h1 className="text-4xl text-gray-300 text-center">
           404: 没有找到页面
