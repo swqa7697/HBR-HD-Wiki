@@ -9,7 +9,7 @@ function ScoreRecords() {
 
   return (
     <div className="flex flex-1 md:flex-wrap w-full p-5 items-center justify-start flex-col md:flex-row gap-5">
-      <CardImg_H imgSrc="/assets/stickers/1/499421686@2x.avif">
+      <CardImg_H imgSrc="/assets/stickers/1/499421707@2x.avif">
         <div className="flex flex-col items-center gap-2 text-2xl">
           <p className="text-amber-50 mb-3">
             <a

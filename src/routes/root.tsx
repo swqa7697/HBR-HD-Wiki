@@ -14,7 +14,9 @@ function Root() {
         />
         <div className="absolute inset-0 bg-transparent z-50" />
       </div>
-      <div className="absolute w-full h-1/6 min-h-[105px] max-h-[120px] z-0 bg-gradient-to-r from-pink-100 via-neutral-50 to-pink-100" />
+      <div className="flex absolute w-full h-1/6 min-h-[105px] max-h-[120px] items-center z-0 bg-gradient-to-r from-pink-100 via-neutral-50 to-pink-100">
+        <div className="w-full h-[55%] bg-[url('/assets/stickers/2/499421867@2x.avif')] bg-contain" />
+      </div>
 
       {/* 立绘 */}
       <div className="absolute h-screen w-screen overflow-hidden pointer-events-none select-none">
