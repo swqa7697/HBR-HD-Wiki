@@ -11,4 +11,12 @@ export const navRoutes: RouteListItem[] = [
   { path: '/hard', name: '异时层解法' },
 ];
 
-export const sitemapRoutes: RouteListItem[] = [...navRoutes.slice(1)];
+export const toolRoutes: RouteListItem[] = [
+  { path: '/od-tool', name: 'OD计算器' },
+  { path: '/dr-tool', name: '破坏率计算器' },
+];
+
+export const sitemapRoutes: RouteListItem[] = [
+  ...navRoutes.slice(1),
+  ...toolRoutes,
+];

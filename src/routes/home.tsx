@@ -46,7 +46,7 @@ function Home() {
       {/* 站内实用工具 */}
       <CardImg_H imgSrc="/assets/stickers/2/499421853@2x.avif">
         <div className="flex flex-col items-center text-2xl gap-1">
-          <p className="font-bold mb-2">站内实用工具</p>
+          <p className="font-bold mb-2">站内工具</p>
           <p className="text-amber-50">
             <Link to="/od-tool" target="_blank" rel="noopener noreferrer">
               OD计算器

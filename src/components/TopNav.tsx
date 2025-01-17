@@ -1,7 +1,8 @@
 import { CustomFlowbiteTheme, Dropdown, Navbar } from 'flowbite-react';
 import { Link, useLocation } from 'react-router';
 import { FaToolbox } from 'react-icons/fa6';
-import { navRoutes } from '../util/site-routes';
+import { TbArrowBackUpDouble } from 'react-icons/tb';
+import { navRoutes, toolRoutes } from '../util/site-routes';
 
 const customNavBarTheme: CustomFlowbiteTheme['navbar'] = {
   root: {
@@ -25,6 +26,7 @@ const customNavBarTheme: CustomFlowbiteTheme['navbar'] = {
 
 export const TopNav = () => {
   const location = useLocation();
+  const isTool = toolRoutes.some((route) => location.pathname === route.path);
 
   return (
     <Navbar fluid theme={customNavBarTheme}>
@@ -40,6 +42,17 @@ export const TopNav = () => {
         </div>
       </Navbar.Brand>
       <div className="flex gap-3 md:order-2">
+        {isTool && (
+          <Link
+            to="/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex p-0 gap-[2px] self-center text-white font-semibold"
+          >
+            <TbArrowBackUpDouble size={18} className="self-center" />
+            返回高难Wiki
+          </Link>
+        )}
         <Dropdown
           renderTrigger={() => (
             <FaToolbox size={28} color="white" className="self-center" />
@@ -48,7 +61,7 @@ export const TopNav = () => {
           trigger="hover"
         >
           <Dropdown.Header>
-            <span className="block font-semibold">站内实用工具</span>
+            <span className="block font-semibold">站内工具</span>
           </Dropdown.Header>
           <Dropdown.Item
             as={Link}
@@ -77,21 +90,27 @@ export const TopNav = () => {
           >
             排轴工具
           </Dropdown.Item>
+          <Dropdown.Divider />
+          <Dropdown.Item disabled className="text-gray-400">
+            编辑（登录）
+          </Dropdown.Item>
         </Dropdown>
-        <Navbar.Toggle />
+        {!isTool && <Navbar.Toggle />}
       </div>
-      <Navbar.Collapse>
-        {navRoutes.map((route, idx) => (
-          <Navbar.Link
-            key={idx}
-            as={Link}
-            to={route.path}
-            active={location.pathname === route.path}
-          >
-            {route.name}
-          </Navbar.Link>
-        ))}
-      </Navbar.Collapse>
+      {!isTool && (
+        <Navbar.Collapse>
+          {navRoutes.map((route, idx) => (
+            <Navbar.Link
+              key={idx}
+              as={Link}
+              to={route.path}
+              active={location.pathname === route.path}
+            >
+              {route.name}
+            </Navbar.Link>
+          ))}
+        </Navbar.Collapse>
+      )}
     </Navbar>
   );
 };
