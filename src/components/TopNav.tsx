@@ -1,5 +1,6 @@
-import { CustomFlowbiteTheme, Navbar } from 'flowbite-react';
+import { CustomFlowbiteTheme, Dropdown, Navbar } from 'flowbite-react';
 import { Link, useLocation } from 'react-router';
+import { FaToolbox } from 'react-icons/fa6';
 import { navRoutes } from '../util/site-routes';
 
 const customNavBarTheme: CustomFlowbiteTheme['navbar'] = {
@@ -38,7 +39,47 @@ export const TopNav = () => {
           <div className="absolute inset-0 bg-transparent" />
         </div>
       </Navbar.Brand>
-      <Navbar.Toggle />
+      <div className="flex gap-3 md:order-2">
+        <Dropdown
+          renderTrigger={() => (
+            <FaToolbox size={28} color="white" className="self-center" />
+          )}
+          inline
+          trigger="hover"
+        >
+          <Dropdown.Header>
+            <span className="block font-semibold">站内实用工具</span>
+          </Dropdown.Header>
+          <Dropdown.Item
+            as={Link}
+            to="/od-tool"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="hover:text-black"
+          >
+            OD计算器
+          </Dropdown.Item>
+          <Dropdown.Item
+            as={Link}
+            to="/dr-tool"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="hover:text-black"
+          >
+            破坏率计算器
+          </Dropdown.Item>
+          <Dropdown.Item
+            as="a"
+            href="https://docs.qq.com/sheet/DZFhHTEFadHRGV3J1"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="hover:text-black"
+          >
+            排轴工具
+          </Dropdown.Item>
+        </Dropdown>
+        <Navbar.Toggle />
+      </div>
       <Navbar.Collapse>
         {navRoutes.map((route, idx) => (
           <Navbar.Link
