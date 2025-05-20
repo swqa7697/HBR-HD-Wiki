@@ -1,6 +1,8 @@
-import { CustomFlowbiteTheme, Navbar } from 'flowbite-react';
+import { CustomFlowbiteTheme, Dropdown, Navbar } from 'flowbite-react';
 import { Link, useLocation } from 'react-router';
-import { navRoutes } from '../util/site-routes';
+import { FaToolbox } from 'react-icons/fa6';
+import { TbArrowBackUpDouble } from 'react-icons/tb';
+import { navRoutes, toolRoutes } from '../util/site-routes';
 
 const customNavBarTheme: CustomFlowbiteTheme['navbar'] = {
   root: {
@@ -24,6 +26,7 @@ const customNavBarTheme: CustomFlowbiteTheme['navbar'] = {
 
 export const TopNav = () => {
   const location = useLocation();
+  const isTool = toolRoutes.some((route) => location.pathname === route.path);
 
   return (
     <Navbar fluid theme={customNavBarTheme}>
@@ -38,19 +41,76 @@ export const TopNav = () => {
           <div className="absolute inset-0 bg-transparent" />
         </div>
       </Navbar.Brand>
-      <Navbar.Toggle />
-      <Navbar.Collapse>
-        {navRoutes.map((route, idx) => (
-          <Navbar.Link
-            key={idx}
-            as={Link}
-            to={route.path}
-            active={location.pathname === route.path}
+      <div className="flex gap-3 md:order-2">
+        {isTool && (
+          <Link
+            to="/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex p-0 gap-[2px] self-center text-white font-semibold"
           >
-            {route.name}
-          </Navbar.Link>
-        ))}
-      </Navbar.Collapse>
+            <TbArrowBackUpDouble size={18} className="self-center" />
+            返回高难Wiki
+          </Link>
+        )}
+        <Dropdown
+          renderTrigger={() => (
+            <FaToolbox size={28} color="white" className="self-center" />
+          )}
+          inline
+          trigger="hover"
+        >
+          <Dropdown.Header>
+            <span className="block font-semibold">站内工具</span>
+          </Dropdown.Header>
+          <Dropdown.Item
+            as={Link}
+            to="/od-tool"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="hover:text-black"
+          >
+            OD计算器
+          </Dropdown.Item>
+          <Dropdown.Item
+            as={Link}
+            to="/dr-tool"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="hover:text-black"
+          >
+            破坏率计算器
+          </Dropdown.Item>
+          <Dropdown.Item
+            as="a"
+            href="https://docs.qq.com/sheet/DZFhHTEFadHRGV3J1"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="hover:text-black"
+          >
+            排轴工具
+          </Dropdown.Item>
+          <Dropdown.Divider />
+          <Dropdown.Item disabled className="text-gray-400">
+            编辑（登录）
+          </Dropdown.Item>
+        </Dropdown>
+        {!isTool && <Navbar.Toggle />}
+      </div>
+      {!isTool && (
+        <Navbar.Collapse>
+          {navRoutes.map((route, idx) => (
+            <Navbar.Link
+              key={idx}
+              as={Link}
+              to={route.path}
+              active={location.pathname === route.path}
+            >
+              {route.name}
+            </Navbar.Link>
+          ))}
+        </Navbar.Collapse>
+      )}
     </Navbar>
   );
 };

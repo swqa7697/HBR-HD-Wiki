@@ -1,4 +1,5 @@
 import { useEffect } from 'react';
+import { Link } from 'react-router';
 import { Tooltip } from 'flowbite-react';
 import { CardImg_H } from '../components/CardImg_H';
 import { base_title, home_title } from '../util/titles.json';
@@ -45,29 +46,17 @@ function Home() {
       {/* 站内实用工具 */}
       <CardImg_H imgSrc="/assets/stickers/2/499421853@2x.avif">
         <div className="flex flex-col items-center text-2xl gap-1">
-          <p className="font-bold mb-2">站内实用工具</p>
-          <Tooltip content="文档版（网页版开发中）">
-            <p className="text-amber-50">
-              <a
-                href="https://docs.qq.com/sheet/DUVBOVkFBZHR4VVJn"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                OD计算器
-              </a>
-            </p>
-          </Tooltip>
-          <Tooltip content="文档版（网页版开发中）">
-            <p className="text-amber-50">
-              <a
-                href="https://docs.qq.com/sheet/DQXZyeGJic0plekFO"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                破坏率计算器
-              </a>
-            </p>
-          </Tooltip>
+          <p className="font-bold mb-2">站内工具</p>
+          <p className="text-amber-50">
+            <Link to="/od-tool" target="_blank" rel="noopener noreferrer">
+              OD计算器
+            </Link>
+          </p>
+          <p className="text-amber-50">
+            <Link to="/dr-tool" target="_blank" rel="noopener noreferrer">
+              破坏率计算器
+            </Link>
+          </p>
           <Tooltip content="文档版（网页版开发中）">
             <p className="text-amber-50">
               <a

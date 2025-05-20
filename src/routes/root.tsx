@@ -35,10 +35,10 @@ function Root() {
 
       {/* Main contents */}
       <div className="flex flex-col items-center w-full h-full">
-        <div className="w-full z-20">
+        <div className="w-full z-30">
           <TopNav />
         </div>
-        <div className="flex-1 w-full md:w-3/4 bg-slate-100/85 pb-40 overflow-y-auto scrollbar-hide z-20">
+        <div className="flex-1 w-full md:w-3/4 bg-slate-100/85 pb-28 overflow-y-auto scrollbar-hide z-20">
           <Outlet />
         </div>
       </div>
