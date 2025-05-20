@@ -1,4 +1,5 @@
 import { useCallback, useEffect, useState } from 'react';
+
 import { CalcOD } from '../components/CalcOD';
 import { tool_od_title, base_title } from '../util/titles.json';
 import { AddCalc } from '../components/AddCalc';
@@ -65,33 +66,24 @@ function ODTool() {
       </h1>
 
       {/* Contents Div */}
-      <div className="flex w-full h-full flex-col md:flex-row-reverse items-center md:items-start md:justify-around">
-        {/* 速查表 */}
-        <div className="flex flex-col w-1/3 items-center mb-3 bg-slate-600/20">
-          <p>速查表</p>
-          <p>...</p>
-          <p>...</p>
-        </div>
-
-        {/* 计算器 */}
-        <div className="flex flex-col md:w-3/5 h-full items-center">
-          <ul className="h-full overflow-y-auto scrollbar-hide">
-            {calcs.map((calc) => (
-              <li className="mb-2">
-                <CalcOD
-                  key={calc.id}
-                  id={calc.id}
-                  initValues={calc.calcInputs}
-                  onChange={handleUpdate}
-                  onRemove={() => handleRemove(calc.id)}
-                />
-              </li>
-            ))}
-            <li>
-              <AddCalc onAdd={handleAdd} />
+      {/* 计算器 */}
+      <div className="flex flex-col w-full h-full items-center pl-5 pr-5">
+        <ul className="h-full overflow-y-auto scrollbar-hide">
+          {calcs.map((calc) => (
+            <li className="mb-2">
+              <CalcOD
+                key={calc.id}
+                id={calc.id}
+                initValues={calc.calcInputs}
+                onChange={handleUpdate}
+                onRemove={() => handleRemove(calc.id)}
+              />
             </li>
-          </ul>
-        </div>
+          ))}
+          <li>
+            <AddCalc onAdd={handleAdd} />
+          </li>
+        </ul>
       </div>
     </div>
   );
