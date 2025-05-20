@@ -5,7 +5,8 @@ import { tool_od_title, base_title } from '../util/titles.json';
 import { AddCalc } from '../components/AddCalc';
 import { CalcFieldsOD, createDefaultODFields } from '../util/calc-utils';
 
-const STORAGE_KEY = 'ODCalcs';
+const OD_CALC_STORAGE_KEY = 'ODCalcs';
+const OD_SHOW_PERCENTAGE_STORAGE_KEY = 'ODShowPercentage';
 
 interface ODCalcItem {
   id: string;
@@ -18,7 +19,7 @@ function ODTool() {
   }, []);
 
   const [calcs, setCalcs] = useState<ODCalcItem[]>(() => {
-    const raw = localStorage.getItem(STORAGE_KEY);
+    const raw = localStorage.getItem(OD_CALC_STORAGE_KEY);
     const initCalcs: ODCalcItem[] =
       raw && raw.startsWith('[') ? JSON.parse(raw) : [];
 
@@ -33,11 +34,25 @@ function ODTool() {
     return initCalcs;
   });
 
+  const [isShowPercentage, setIsShowPercentage] = useState<boolean>(() => {
+    const raw = localStorage.getItem(OD_SHOW_PERCENTAGE_STORAGE_KEY);
+    return raw ? raw === 'true' : false;
+  });
+
   useEffect(() => {
     if (calcs) {
-      localStorage.setItem(STORAGE_KEY, JSON.stringify(calcs));
+      localStorage.setItem(OD_CALC_STORAGE_KEY, JSON.stringify(calcs));
     }
   }, [calcs]);
+
+  useEffect(() => {
+    if (isShowPercentage !== undefined) {
+      localStorage.setItem(
+        OD_SHOW_PERCENTAGE_STORAGE_KEY,
+        JSON.stringify(isShowPercentage),
+      );
+    }
+  }, [isShowPercentage]);
 
   const handleUpdate = useCallback((newInputs: CalcFieldsOD, id: string) => {
     setCalcs((prev) =>
@@ -77,6 +92,8 @@ function ODTool() {
                 initValues={calc.calcInputs}
                 onChange={handleUpdate}
                 onRemove={() => handleRemove(calc.id)}
+                isShowPercentage={isShowPercentage}
+                setIsShowPercentage={setIsShowPercentage}
               />
             </li>
           ))}

@@ -12,6 +12,8 @@ interface CalcODProps {
   initValues?: CalcFieldsOD;
   onChange?: (changedInputs: CalcFieldsOD, id: string) => void;
   onRemove?: () => void;
+  isShowPercentage?: boolean;
+  setIsShowPercentage?: (toggleShowPercentage: boolean) => void;
 }
 
 export const CalcOD: FC<CalcODProps> = ({
@@ -19,6 +21,8 @@ export const CalcOD: FC<CalcODProps> = ({
   initValues,
   onChange,
   onRemove,
+  isShowPercentage,
+  setIsShowPercentage,
 }) => {
   const [inputs, setInputs] = useState<CalcFieldsOD>(
     () => initValues ?? createDefaultODFields(),
@@ -136,7 +140,7 @@ export const CalcOD: FC<CalcODProps> = ({
               </Select>
             </div>
           </div>
-          <div className="flex flex-row justify-between gap-2">
+          <div className="flex flex-row justify-start gap-2">
             <div>
               <Label htmlFor="fixedOD">固定OD</Label>
               <TextInput
@@ -186,10 +190,23 @@ export const CalcOD: FC<CalcODProps> = ({
           </div>
         </div>
         <div className="flex flex-col items-center justify-between min-w-fit">
-          <Label className="font-[500] text-lg md:mt-3 mt-[18px]">
-            实际Hit
-          </Label>
-          <Label className="font-[600] text-base mb-1">{output}</Label>
+          <div
+            className="flex flex-col items-center mt-3 gap-2 min-w-16"
+            onClick={() => {
+              if (setIsShowPercentage && isShowPercentage !== undefined) {
+                setIsShowPercentage(!isShowPercentage);
+              }
+            }}
+          >
+            <Label className="font-[500] text-lg">
+              {!isShowPercentage ? '实际Hit' : '实际%'}
+            </Label>
+            <Label className="font-[600] text-base">
+              {!isShowPercentage
+                ? output
+                : `${((output / 40) * 100).toFixed(2)}%`}
+            </Label>
+          </div>
           <div className="flex flex-col justify-end gap-[2px] min-w-max">
             <div className="flex items-center gap-[3px]">
               <Checkbox
