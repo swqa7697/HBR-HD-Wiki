@@ -1,29 +1,71 @@
-import { useEffect } from 'react';
-import {
-  //MdCheckBox,
-  MdCheckBoxOutlineBlank,
-  //MdIndeterminateCheckBox,
-  MdEditNote,
-  //MdCheck,
-  MdDeleteOutline,
-} from 'react-icons/md';
+import { useCallback, useEffect, useState } from 'react';
 import { CalcOD } from '../components/CalcOD';
 import { tool_od_title, base_title } from '../util/titles.json';
+import { AddCalc } from '../components/AddCalc';
+import { CalcFieldsOD, createDefaultODFields } from '../util/calc-utils';
+
+const STORAGE_KEY = 'ODCalcs';
+
+interface ODCalcItem {
+  id: string;
+  calcInputs: CalcFieldsOD;
+}
 
 function ODTool() {
   useEffect(() => {
     document.title = `${tool_od_title} | ${base_title}`;
   }, []);
 
+  const [calcs, setCalcs] = useState<ODCalcItem[]>(() => {
+    const raw = localStorage.getItem(STORAGE_KEY);
+    const initCalcs: ODCalcItem[] =
+      raw && raw.startsWith('[') ? JSON.parse(raw) : [];
+
+    if (initCalcs.length === 0) {
+      initCalcs.push({
+        id: Date.now().toString(),
+        calcInputs: createDefaultODFields(),
+      });
+    }
+    console.log(initCalcs);
+
+    return initCalcs;
+  });
+
+  useEffect(() => {
+    if (calcs) {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(calcs));
+    }
+  }, [calcs]);
+
+  const handleUpdate = useCallback((newInputs: CalcFieldsOD, id: string) => {
+    setCalcs((prev) =>
+      prev.map((calc) =>
+        calc.id === id ? { ...calc, calcInputs: newInputs } : calc,
+      ),
+    );
+  }, []);
+
+  const handleAdd = useCallback(() => {
+    setCalcs((prev) => [
+      ...prev,
+      { id: Date.now().toString(), calcInputs: createDefaultODFields() },
+    ]);
+  }, []);
+
+  const handleRemove = useCallback((id: string) => {
+    setCalcs((prev) => prev.filter((calc) => calc.id !== id));
+  }, []);
+
   return (
-    <div className="flex flex-col w-full h-[97%] pb-[156px] md:pb-[68px] items-center overflow-hidden">
+    <div className="flex flex-col w-full h-[97%] pb-[156px] md:pb-[68px] items-center justify-around overflow-hidden">
       {/* Header */}
       <h1 className="block text-3xl [text-shadow:1px_1px_3px_gray] pt-5 pb-3">
         OD计算器
       </h1>
 
       {/* Contents Div */}
-      <div className="flex w-full h-full flex-col md:flex-row-reverse items-center md:items-start md:justify-evenly">
+      <div className="flex w-full h-full flex-col md:flex-row-reverse items-center md:items-start md:justify-around">
         {/* 速查表 */}
         <div className="flex flex-col w-1/3 items-center mb-3 bg-slate-600/20">
           <p>速查表</p>
@@ -32,21 +74,22 @@ function ODTool() {
         </div>
 
         {/* 计算器 */}
-        <div className="flex flex-col md:w-3/5 w-[90%] h-full">
-          <div className="flex flex-row w-full h-8 justify-between">
-            <div>
-              <MdCheckBoxOutlineBlank size={24} />
-            </div>
-            <div className="flex flex-row-reverse">
-              <MdEditNote size={24} />
-              <MdDeleteOutline size={24} />
-            </div>
-          </div>
-          <ul className="w-full h-full overflow-y-auto scrollbar-hide">
-            <CalcOD />
-            {Array.from({ length: 50 }, (_, idx) => (
-              <li key={idx}>Calc {idx}</li>
+        <div className="flex flex-col md:w-3/5 h-full items-center">
+          <ul className="h-full overflow-y-auto scrollbar-hide">
+            {calcs.map((calc) => (
+              <li className="mb-2">
+                <CalcOD
+                  key={calc.id}
+                  id={calc.id}
+                  initValues={calc.calcInputs}
+                  onChange={handleUpdate}
+                  onRemove={() => handleRemove(calc.id)}
+                />
+              </li>
             ))}
+            <li>
+              <AddCalc onAdd={handleAdd} />
+            </li>
           </ul>
         </div>
       </div>

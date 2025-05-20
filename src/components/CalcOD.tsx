@@ -1,21 +1,38 @@
-import React, { useEffect, useState } from 'react';
+import React, { FC, useEffect, useState } from 'react';
 import { Card, Checkbox, Label, Select, TextInput } from 'flowbite-react';
+import { MdClose } from 'react-icons/md';
 import {
   CalcFieldsOD,
   calcOD,
   createDefaultODFields,
 } from '../util/calc-utils';
 
-export const CalcOD = () => {
-  const [inputs, setInputs] = useState<CalcFieldsOD>(() =>
-    createDefaultODFields(),
+interface CalcODProps {
+  id?: string;
+  initValues?: CalcFieldsOD;
+  onChange?: (changedInputs: CalcFieldsOD, id: string) => void;
+  onRemove?: () => void;
+}
+
+export const CalcOD: FC<CalcODProps> = ({
+  id,
+  initValues,
+  onChange,
+  onRemove,
+}) => {
+  const [inputs, setInputs] = useState<CalcFieldsOD>(
+    () => initValues ?? createDefaultODFields(),
   );
 
   const [output, setOutput] = useState<number>(0);
 
   useEffect(() => {
     setOutput(calcOD(inputs));
-  }, [inputs]);
+
+    if (onChange && id) {
+      onChange(inputs, id);
+    }
+  }, [inputs, onChange, id]);
 
   const handleNumber = (
     e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>,
@@ -43,12 +60,20 @@ export const CalcOD = () => {
 
     setInputs((prev) => ({
       ...prev,
-      [name]: intValue < 0 ? 100 : intValue,
+      [name]: intValue > 0 && intValue !== 100 ? intValue : 100,
     }));
   };
 
   return (
-    <Card className="max-w-lg bg-gradient-to-tl from-rose-800/35 from-20% to-pink-800/20 border-0">
+    <Card className="relative max-w-lg bg-gradient-to-tl from-rose-800/35 from-20% to-pink-800/20 border-0">
+      {onRemove && (
+        <div
+          className="absolute top-[10px] right-[10px] md:opacity-0 md:hover:opacity-100"
+          onClick={onRemove}
+        >
+          <MdClose size={22} />
+        </div>
+      )}
       <div className="flex flex-row w-full justify-between md:gap-4 gap-3">
         <div className="flex flex-col gap-1 w-[88%]">
           <div className="flex flex-row justify-between gap-2">
@@ -60,10 +85,8 @@ export const CalcOD = () => {
                 type="number"
                 sizing="md"
                 placeholder="0"
+                value={inputs.hit > 0 ? inputs.hit : ''}
                 onChange={handleNumber}
-                onBlur={(e) =>
-                  (e.target.value = inputs.hit > 0 ? String(inputs.hit) : '')
-                }
                 className="min-w-12 max-w-24"
               />
             </div>
@@ -75,11 +98,8 @@ export const CalcOD = () => {
                 type="number"
                 sizing="md"
                 placeholder="0"
+                value={inputs.hitCountUp > 0 ? inputs.hitCountUp : ''}
                 onChange={handleNumber}
-                onBlur={(e) =>
-                  (e.target.value =
-                    inputs.hitCountUp > 0 ? String(inputs.hitCountUp) : '')
-                }
                 className="min-w-12 max-w-24"
               />
             </div>
@@ -126,11 +146,8 @@ export const CalcOD = () => {
                 sizing="md"
                 placeholder="0"
                 rightIcon={() => <p>%</p>}
+                value={inputs.fixedOD > 0 ? inputs.fixedOD : ''}
                 onChange={handleNumber}
-                onBlur={(e) =>
-                  (e.target.value =
-                    inputs.fixedOD > 0 ? String(inputs.fixedOD) : '')
-                }
                 className="min-w-12 max-w-24"
               />
             </div>
@@ -143,11 +160,8 @@ export const CalcOD = () => {
                 sizing="md"
                 placeholder="0"
                 rightIcon={() => <p>%</p>}
+                value={inputs.otherBuff > 0 ? inputs.otherBuff : ''}
                 onChange={handleNumber}
-                onBlur={(e) =>
-                  (e.target.value =
-                    inputs.otherBuff > 0 ? String(inputs.otherBuff) : '')
-                }
                 className="min-w-12 max-w-24"
               />
             </div>
@@ -160,22 +174,23 @@ export const CalcOD = () => {
                 sizing="md"
                 placeholder="100"
                 rightIcon={() => <p>%</p>}
-                onChange={handleODRate}
-                onBlur={(e) =>
-                  (e.target.value =
-                    inputs.odRate < 0 || inputs.odRate === 100
-                      ? ''
-                      : String(inputs.odRate))
+                value={
+                  inputs.odRate > 0 && inputs.odRate !== 100
+                    ? inputs.odRate
+                    : ''
                 }
+                onChange={handleODRate}
                 className="min-w-12 max-w-24"
               />
             </div>
           </div>
         </div>
         <div className="flex flex-col items-center justify-between min-w-fit">
-          <Label className="font-[500] text-lg mt-2">实际Hit</Label>
-          <Label className="font-[600] text-base">{output}</Label>
-          <div className="flex flex-col justify-end gap-[3px] min-w-max">
+          <Label className="font-[500] text-lg md:mt-3 mt-[18px]">
+            实际Hit
+          </Label>
+          <Label className="font-[600] text-base mb-1">{output}</Label>
+          <div className="flex flex-col justify-end gap-[2px] min-w-max">
             <div className="flex items-center gap-[3px]">
               <Checkbox
                 id="isResisted"
