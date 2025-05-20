@@ -42,7 +42,7 @@ export const CalcOD: FC<CalcODProps> = ({
     }
   }, [inputs, onChange, id]);
 
-  const handleNumber = (
+  const handleInt = (
     e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>,
   ) => {
     const { name, value } = e.target;
@@ -51,6 +51,16 @@ export const CalcOD: FC<CalcODProps> = ({
     setInputs((prev) => ({
       ...prev,
       [name]: intValue < 0 ? 0 : intValue,
+    }));
+  };
+
+  const handleFloat = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+    const floatValue = Number(value);
+
+    setInputs((prev) => ({
+      ...prev,
+      [name]: floatValue < 0 ? 0 : floatValue,
     }));
   };
 
@@ -94,7 +104,7 @@ export const CalcOD: FC<CalcODProps> = ({
                 sizing="md"
                 placeholder="0"
                 value={inputs.hit > 0 ? inputs.hit : ''}
-                onChange={handleNumber}
+                onChange={handleInt}
                 className="min-w-12 max-w-24"
               />
             </div>
@@ -107,7 +117,7 @@ export const CalcOD: FC<CalcODProps> = ({
                 sizing="md"
                 placeholder="0"
                 value={inputs.hitCountUp > 0 ? inputs.hitCountUp : ''}
-                onChange={handleNumber}
+                onChange={handleInt}
                 className="min-w-12 max-w-24"
               />
             </div>
@@ -117,7 +127,7 @@ export const CalcOD: FC<CalcODProps> = ({
                 id={`earrings-${id}`}
                 name="earrings"
                 value={inputs.earrings}
-                onChange={handleNumber}
+                onChange={handleInt}
                 className="min-w-max max-w-24"
               >
                 {[0, 10, 12, 15].map((n) => (
@@ -133,7 +143,7 @@ export const CalcOD: FC<CalcODProps> = ({
                 id={`numTarget-${id}`}
                 name="numTarget"
                 value={inputs.numTarget}
-                onChange={handleNumber}
+                onChange={handleInt}
                 className="min-w-max max-w-24"
               >
                 {[1, 2, 3].map((n) => (
@@ -155,7 +165,7 @@ export const CalcOD: FC<CalcODProps> = ({
                 placeholder="0"
                 rightIcon={() => <p>%</p>}
                 value={inputs.fixedOD > 0 ? inputs.fixedOD : ''}
-                onChange={handleNumber}
+                onChange={handleFloat}
                 className="min-w-12 max-w-24"
               />
             </div>
@@ -169,7 +179,7 @@ export const CalcOD: FC<CalcODProps> = ({
                 placeholder="0"
                 rightIcon={() => <p>%</p>}
                 value={inputs.otherBuff > 0 ? inputs.otherBuff : ''}
-                onChange={handleNumber}
+                onChange={handleInt}
                 className="min-w-12 max-w-24"
               />
             </div>

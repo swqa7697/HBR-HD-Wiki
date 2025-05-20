@@ -1,7 +1,7 @@
 export interface CalcFieldsOD {
   hit: number;
   hitCountUp: number;
-  fixedOD: number; // %
+  fixedOD: number; // % float allowed
   numTarget: 1 | 2 | 3;
   earrings: 0 | 10 | 12 | 15; // %
   isBaboo: boolean;
@@ -13,7 +13,7 @@ export interface CalcFieldsOD {
 export const createDefaultODFields = (): CalcFieldsOD => ({
   hit: 0,
   hitCountUp: 0,
-  fixedOD: 0, // %
+  fixedOD: 0, // % float allowed
   numTarget: 1,
   earrings: 15, // %
   isBaboo: false,
