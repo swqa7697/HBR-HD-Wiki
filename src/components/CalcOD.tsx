@@ -30,10 +30,14 @@ export const CalcOD: FC<CalcODProps> = ({
 
   const [output, setOutput] = useState<number>(0);
 
+  if (!id) {
+    id = Date.now().toString();
+  }
+
   useEffect(() => {
     setOutput(calcOD(inputs));
 
-    if (onChange && id) {
+    if (onChange) {
       onChange(inputs, id);
     }
   }, [inputs, onChange, id]);
@@ -82,9 +86,9 @@ export const CalcOD: FC<CalcODProps> = ({
         <div className="flex flex-col gap-1 w-[88%]">
           <div className="flex flex-row justify-between gap-2">
             <div>
-              <Label htmlFor="hit">Hit数</Label>
+              <Label htmlFor={`hit-${id}`}>Hit数</Label>
               <TextInput
-                id="hit"
+                id={`hit-${id}`}
                 name="hit"
                 type="number"
                 sizing="md"
@@ -95,9 +99,9 @@ export const CalcOD: FC<CalcODProps> = ({
               />
             </div>
             <div>
-              <Label htmlFor="hitCountUp">连击数</Label>
+              <Label htmlFor={`hitCountUp-${id}`}>连击数</Label>
               <TextInput
-                id="hitCountUp"
+                id={`hitCountUp-${id}`}
                 name="hitCountUp"
                 type="number"
                 sizing="md"
@@ -108,9 +112,9 @@ export const CalcOD: FC<CalcODProps> = ({
               />
             </div>
             <div>
-              <Label htmlFor="earrings">耳环系数</Label>
+              <Label htmlFor={`earrings-${id}`}>耳环系数</Label>
               <Select
-                id="earrings"
+                id={`earrings-${id}`}
                 name="earrings"
                 value={inputs.earrings}
                 onChange={handleNumber}
@@ -124,9 +128,9 @@ export const CalcOD: FC<CalcODProps> = ({
               </Select>
             </div>
             <div>
-              <Label htmlFor="numTarget">目标数</Label>
+              <Label htmlFor={`numTarget-${id}`}>目标数</Label>
               <Select
-                id="numTarget"
+                id={`numTarget-${id}`}
                 name="numTarget"
                 value={inputs.numTarget}
                 onChange={handleNumber}
@@ -142,9 +146,9 @@ export const CalcOD: FC<CalcODProps> = ({
           </div>
           <div className="flex flex-row justify-start gap-2">
             <div>
-              <Label htmlFor="fixedOD">固定OD</Label>
+              <Label htmlFor={`fixedOD-${id}`}>固定OD</Label>
               <TextInput
-                id="fixedOD"
+                id={`fixedOD-${id}`}
                 name="fixedOD"
                 type="number"
                 sizing="md"
@@ -156,9 +160,9 @@ export const CalcOD: FC<CalcODProps> = ({
               />
             </div>
             <div>
-              <Label htmlFor="otherBuff">其他增益</Label>
+              <Label htmlFor={`otherBuff-${id}`}>其他增益</Label>
               <TextInput
-                id="otherBuff"
+                id={`otherBuff-${id}`}
                 name="otherBuff"
                 type="number"
                 sizing="md"
@@ -170,9 +174,9 @@ export const CalcOD: FC<CalcODProps> = ({
               />
             </div>
             <div>
-              <Label htmlFor="odRate">敌方OD率</Label>
+              <Label htmlFor={`odRate-${id}`}>敌方OD率</Label>
               <TextInput
-                id="odRate"
+                id={`odRate-${id}`}
                 name="odRate"
                 type="number"
                 sizing="md"
@@ -210,21 +214,21 @@ export const CalcOD: FC<CalcODProps> = ({
           <div className="flex flex-col justify-end gap-[2px] min-w-max">
             <div className="flex items-center gap-[3px]">
               <Checkbox
-                id="isResisted"
+                id={`isResisted-${id}`}
                 name="isResisted"
                 checked={inputs.isResisted}
                 onChange={handleBoolean}
               ></Checkbox>
-              <Label htmlFor="isResisted">抗性</Label>
+              <Label htmlFor={`isResisted-${id}`}>抗性</Label>
             </div>
             <div className="flex items-center gap-[3px]">
               <Checkbox
-                id="isBaboo"
+                id={`isBaboo-${id}`}
                 name="isBaboo"
                 checked={inputs.isBaboo}
                 onChange={handleBoolean}
               ></Checkbox>
-              <Label htmlFor="isBaboo">幼儿化</Label>
+              <Label htmlFor={`isBaboo-${id}`}>幼儿化</Label>
             </div>
           </div>
         </div>
