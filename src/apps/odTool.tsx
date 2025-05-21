@@ -1,5 +1,4 @@
 import { useCallback, useEffect, useState } from 'react';
-
 import { CalcOD } from '../components/CalcOD';
 import { tool_od_title, base_title } from '../util/titles.json';
 import { AddCalc } from '../components/AddCalc';
@@ -29,7 +28,6 @@ function ODTool() {
         calcInputs: createDefaultODFields(),
       });
     }
-    console.log(initCalcs);
 
     return initCalcs;
   });
@@ -74,16 +72,16 @@ function ODTool() {
   }, []);
 
   return (
-    <div className="flex flex-col w-full h-[97%] pb-[156px] md:pb-[68px] items-center justify-around overflow-hidden">
+    <div className="flex flex-col w-full h-[97%] items-center justify-around overflow-hidden">
       {/* Header */}
-      <h1 className="block text-3xl [text-shadow:1px_1px_3px_gray] pt-5 pb-3">
+      <h1 className="block text-3xl [text-shadow:1px_1px_3px_gray] pt-5 pb-5">
         OD计算器
       </h1>
 
       {/* Contents Div */}
       {/* 计算器 */}
-      <div className="flex flex-col w-full h-full items-center pl-5 pr-5">
-        <ul className="h-full overflow-y-auto scrollbar-hide">
+      <div className="flex flex-col w-full h-full items-center overflow-y-auto scrollbar-hide">
+        <ul>
           {calcs.map((calc) => (
             <li className="mb-2">
               <CalcOD
@@ -97,7 +95,7 @@ function ODTool() {
               />
             </li>
           ))}
-          <li>
+          <li className="w-full">
             <AddCalc onAdd={handleAdd} />
           </li>
         </ul>

@@ -42,7 +42,7 @@ export const CalcOD: FC<CalcODProps> = ({
     }
   }, [inputs, onChange, id]);
 
-  const handleNumber = (
+  const handleInt = (
     e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>,
   ) => {
     const { name, value } = e.target;
@@ -51,6 +51,16 @@ export const CalcOD: FC<CalcODProps> = ({
     setInputs((prev) => ({
       ...prev,
       [name]: intValue < 0 ? 0 : intValue,
+    }));
+  };
+
+  const handleFloat = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+    const floatValue = Number(value);
+
+    setInputs((prev) => ({
+      ...prev,
+      [name]: floatValue < 0 ? 0 : floatValue,
     }));
   };
 
@@ -86,7 +96,7 @@ export const CalcOD: FC<CalcODProps> = ({
         <div className="flex flex-col gap-1 w-[88%]">
           <div className="flex flex-row justify-between gap-2">
             <div>
-              <Label htmlFor={`hit-${id}`}>Hit数</Label>
+              <Label htmlFor={`hit-${id}`}>原始Hit</Label>
               <TextInput
                 id={`hit-${id}`}
                 name="hit"
@@ -94,7 +104,7 @@ export const CalcOD: FC<CalcODProps> = ({
                 sizing="md"
                 placeholder="0"
                 value={inputs.hit > 0 ? inputs.hit : ''}
-                onChange={handleNumber}
+                onChange={handleInt}
                 className="min-w-12 max-w-24"
               />
             </div>
@@ -107,7 +117,7 @@ export const CalcOD: FC<CalcODProps> = ({
                 sizing="md"
                 placeholder="0"
                 value={inputs.hitCountUp > 0 ? inputs.hitCountUp : ''}
-                onChange={handleNumber}
+                onChange={handleInt}
                 className="min-w-12 max-w-24"
               />
             </div>
@@ -117,7 +127,7 @@ export const CalcOD: FC<CalcODProps> = ({
                 id={`earrings-${id}`}
                 name="earrings"
                 value={inputs.earrings}
-                onChange={handleNumber}
+                onChange={handleInt}
                 className="min-w-max max-w-24"
               >
                 {[0, 10, 12, 15].map((n) => (
@@ -133,7 +143,7 @@ export const CalcOD: FC<CalcODProps> = ({
                 id={`numTarget-${id}`}
                 name="numTarget"
                 value={inputs.numTarget}
-                onChange={handleNumber}
+                onChange={handleInt}
                 className="min-w-max max-w-24"
               >
                 {[1, 2, 3].map((n) => (
@@ -155,7 +165,7 @@ export const CalcOD: FC<CalcODProps> = ({
                 placeholder="0"
                 rightIcon={() => <p>%</p>}
                 value={inputs.fixedOD > 0 ? inputs.fixedOD : ''}
-                onChange={handleNumber}
+                onChange={handleFloat}
                 className="min-w-12 max-w-24"
               />
             </div>
@@ -169,7 +179,7 @@ export const CalcOD: FC<CalcODProps> = ({
                 placeholder="0"
                 rightIcon={() => <p>%</p>}
                 value={inputs.otherBuff > 0 ? inputs.otherBuff : ''}
-                onChange={handleNumber}
+                onChange={handleInt}
                 className="min-w-12 max-w-24"
               />
             </div>
@@ -218,7 +228,7 @@ export const CalcOD: FC<CalcODProps> = ({
                 name="isResisted"
                 checked={inputs.isResisted}
                 onChange={handleBoolean}
-              ></Checkbox>
+              />
               <Label htmlFor={`isResisted-${id}`}>抗性</Label>
             </div>
             <div className="flex items-center gap-[3px]">
@@ -227,7 +237,7 @@ export const CalcOD: FC<CalcODProps> = ({
                 name="isBaboo"
                 checked={inputs.isBaboo}
                 onChange={handleBoolean}
-              ></Checkbox>
+              />
               <Label htmlFor={`isBaboo-${id}`}>幼儿化</Label>
             </div>
           </div>
