@@ -96,7 +96,7 @@ export const CalcOD: FC<CalcODProps> = ({
         <div className="flex flex-col gap-1 w-[88%]">
           <div className="flex flex-row justify-between gap-2">
             <div>
-              <Label htmlFor={`hit-${id}`}>Hit数</Label>
+              <Label htmlFor={`hit-${id}`}>原始Hit</Label>
               <TextInput
                 id={`hit-${id}`}
                 name="hit"
@@ -228,7 +228,7 @@ export const CalcOD: FC<CalcODProps> = ({
                 name="isResisted"
                 checked={inputs.isResisted}
                 onChange={handleBoolean}
-              ></Checkbox>
+              />
               <Label htmlFor={`isResisted-${id}`}>抗性</Label>
             </div>
             <div className="flex items-center gap-[3px]">
@@ -237,7 +237,7 @@ export const CalcOD: FC<CalcODProps> = ({
                 name="isBaboo"
                 checked={inputs.isBaboo}
                 onChange={handleBoolean}
-              ></Checkbox>
+              />
               <Label htmlFor={`isBaboo-${id}`}>幼儿化</Label>
             </div>
           </div>

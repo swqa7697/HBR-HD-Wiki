@@ -9,7 +9,7 @@ interface AddCalcProps {
 export const AddCalc: FC<AddCalcProps> = ({ onAdd }) => {
   return (
     <Card
-      className="max-w-lg bg-gradient-to-tl from-rose-800/35 from-20% to-pink-800/20 border-0 opacity-55 hover:shadow-lg hover:opacity-65"
+      className="max-w-lg min-w-96 bg-gradient-to-tl from-zinc-800/35 from-25% to-rose-100/20 border-0 opacity-55 hover:shadow-lg hover:opacity-65"
       onClick={onAdd}
     >
       <MdAdd size={56} className="self-center" />
