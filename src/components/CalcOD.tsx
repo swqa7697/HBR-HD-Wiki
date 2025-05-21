@@ -7,11 +7,17 @@ import {
   CalcResult,
   createDefaultODFields,
 } from '../util/calc-utils';
+import { odPresets } from '../util/od-presets';
 
 interface CalcODProps {
   id?: string;
+  initPresetIdx?: number;
   initValues?: CalcFieldsOD;
-  onChange?: (changedInputs: CalcFieldsOD, id: string) => void;
+  onChange?: (
+    changedInputs: CalcFieldsOD,
+    id: string,
+    presetIdx: number,
+  ) => void;
   onRemove?: () => void;
   isShowPercentage?: boolean;
   setIsShowPercentage?: (toggleShowPercentage: boolean) => void;
@@ -19,6 +25,7 @@ interface CalcODProps {
 
 export const CalcOD: FC<CalcODProps> = ({
   id,
+  initPresetIdx,
   initValues,
   onChange,
   onRemove,
@@ -34,6 +41,9 @@ export const CalcOD: FC<CalcODProps> = ({
     resPercentage: 0,
   });
 
+  const [presetIdx, setPresetIdx] = useState<number>(() => initPresetIdx ?? 0);
+  const [isEditing, setIsEditing] = useState<boolean>(false);
+
   if (!id) {
     id = Date.now().toString();
   }
@@ -41,16 +51,24 @@ export const CalcOD: FC<CalcODProps> = ({
   useEffect(() => {
     setOutput(calcOD(inputs));
 
-    if (onChange) {
-      onChange(inputs, id);
+    if (isEditing) {
+      setPresetIdx(0);
+      setIsEditing(false);
     }
-  }, [inputs, onChange, id]);
+
+    if (onChange) {
+      onChange(inputs, id, presetIdx);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [inputs, presetIdx]);
 
   const handleInt = (
     e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>,
   ) => {
     const { name, value } = e.target;
     const intValue = Math.floor(Number(value));
+
+    setIsEditing(true);
 
     setInputs((prev) => ({
       ...prev,
@@ -62,6 +80,8 @@ export const CalcOD: FC<CalcODProps> = ({
     const { name, value } = e.target;
     const floatValue = Number(value);
 
+    setIsEditing(true);
+
     setInputs((prev) => ({
       ...prev,
       [name]: floatValue < 0 ? 0 : floatValue,
@@ -70,6 +90,9 @@ export const CalcOD: FC<CalcODProps> = ({
 
   const handleBoolean = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, checked } = e.target;
+
+    setIsEditing(true);
+
     setInputs((prev) => ({
       ...prev,
       [name]: checked,
@@ -80,10 +103,22 @@ export const CalcOD: FC<CalcODProps> = ({
     const { name, value } = e.target;
     const intValue = Math.floor(Number(value));
 
+    setIsEditing(true);
+
     setInputs((prev) => ({
       ...prev,
       [name]: intValue > 0 && intValue !== 100 ? intValue : 100,
     }));
+  };
+
+  const handlePreset = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    const idx = Number(e.target.value);
+
+    setPresetIdx(idx);
+
+    if (idx > 0) {
+      setInputs(odPresets[idx].presetInputs);
+    }
   };
 
   return (
@@ -96,8 +131,20 @@ export const CalcOD: FC<CalcODProps> = ({
           <MdClose size={22} />
         </div>
       )}
+      <Select
+        id={`preset-${id}`}
+        value={presetIdx}
+        onChange={handlePreset}
+        className="absolute top-[14px] left-6"
+      >
+        {odPresets.map((n, idx) => (
+          <option key={idx} value={idx}>
+            {n.presetName}
+          </option>
+        ))}
+      </Select>
       <div className="flex flex-row w-full justify-between md:gap-4 gap-3">
-        <div className="flex flex-col gap-1 w-[88%]">
+        <div className="flex flex-col gap-1 w-[88%] mt-9">
           <div className="flex flex-row justify-between gap-2">
             <div>
               <Label htmlFor={`hit-${id}`}>原始Hit</Label>
@@ -207,9 +254,9 @@ export const CalcOD: FC<CalcODProps> = ({
             </div>
           </div>
         </div>
-        <div className="flex flex-col items-center justify-between min-w-fit">
+        <div className="flex flex-col items-center justify-between w-20">
           <div
-            className="flex flex-col items-center mt-3 gap-2 min-w-16"
+            className="flex flex-col items-center mt-5 w-full"
             onClick={() => {
               if (setIsShowPercentage && isShowPercentage !== undefined) {
                 setIsShowPercentage(!isShowPercentage);
@@ -219,7 +266,7 @@ export const CalcOD: FC<CalcODProps> = ({
             <Label className="font-[500] text-lg">
               {!isShowPercentage ? '实际Hit' : '实际%'}
             </Label>
-            <Label className="font-[600] text-base">
+            <Label className="font-[600] text-base w-full text-center mt-[22px] pb-3">
               {!isShowPercentage ? output.resValue : `${output.resPercentage}%`}
             </Label>
           </div>
