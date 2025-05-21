@@ -9,6 +9,7 @@ const OD_SHOW_PERCENTAGE_STORAGE_KEY = 'ODShowPercentage';
 
 interface ODCalcItem {
   id: string;
+  presetIdx: number;
   calcInputs: CalcFieldsOD;
 }
 
@@ -25,6 +26,7 @@ function ODTool() {
     if (initCalcs.length === 0) {
       initCalcs.push({
         id: Date.now().toString(),
+        presetIdx: 0,
         calcInputs: createDefaultODFields(),
       });
     }
@@ -52,18 +54,27 @@ function ODTool() {
     }
   }, [isShowPercentage]);
 
-  const handleUpdate = useCallback((newInputs: CalcFieldsOD, id: string) => {
-    setCalcs((prev) =>
-      prev.map((calc) =>
-        calc.id === id ? { ...calc, calcInputs: newInputs } : calc,
-      ),
-    );
-  }, []);
+  const handleUpdate = useCallback(
+    (newInputs: CalcFieldsOD, id: string, presetIdx: number) => {
+      setCalcs((prev) =>
+        prev.map((calc) =>
+          calc.id === id
+            ? { id: id, presetIdx: presetIdx, calcInputs: newInputs }
+            : calc,
+        ),
+      );
+    },
+    [],
+  );
 
   const handleAdd = useCallback(() => {
     setCalcs((prev) => [
       ...prev,
-      { id: Date.now().toString(), calcInputs: createDefaultODFields() },
+      {
+        id: Date.now().toString(),
+        presetIdx: 0,
+        calcInputs: createDefaultODFields(),
+      },
     ]);
   }, []);
 
@@ -87,6 +98,7 @@ function ODTool() {
               <CalcOD
                 key={calc.id}
                 id={calc.id}
+                initPresetIdx={calc.presetIdx}
                 initValues={calc.calcInputs}
                 onChange={handleUpdate}
                 onRemove={() => handleRemove(calc.id)}

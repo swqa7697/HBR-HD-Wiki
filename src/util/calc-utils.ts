@@ -22,7 +22,7 @@ export const createDefaultODFields = (): CalcFieldsOD => ({
   odRate: 100, // %
 });
 
-export const calcOD = (input: CalcFieldsOD): number => {
+export const calcOD = (input: CalcFieldsOD): CalcResult => {
   const {
     hit,
     hitCountUp,
@@ -50,12 +50,17 @@ export const calcOD = (input: CalcFieldsOD): number => {
   const gainedByHit = isResisted
     ? 0
     : (hit + hitCountUp) *
-      (Math.floor(multiplier * odRate * 2.5) / 100) *
+      (Math.floor(2.5 * multiplier * odRate) / 100) *
       numTarget;
 
   const gainedByFixed = Math.floor(fixedOD * multiplier * 100) / 100;
 
-  return Math.floor((gainedByHit + gainedByFixed) * 0.4 * 1000) / 1000;
+  const odPercentage = gainedByHit + gainedByFixed;
+
+  return {
+    resValue: Math.floor(odPercentage * 0.4 * 1000) / 1000,
+    resPercentage: Math.floor(odPercentage * 100) / 100,
+  };
 };
 
 export interface CalcFieldsDR {
