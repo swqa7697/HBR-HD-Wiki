@@ -50,7 +50,7 @@ export const TopNav = () => {
             className="flex p-0 gap-[2px] self-center text-white font-semibold"
           >
             <TbArrowBackUpDouble size={18} className="self-center" />
-            返回高难Wiki
+            返回Wiki
           </Link>
         )}
         <Dropdown
