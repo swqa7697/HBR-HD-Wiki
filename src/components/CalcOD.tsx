@@ -4,6 +4,7 @@ import { MdClose } from 'react-icons/md';
 import {
   CalcFieldsOD,
   calcOD,
+  CalcResult,
   createDefaultODFields,
 } from '../util/calc-utils';
 
@@ -28,7 +29,10 @@ export const CalcOD: FC<CalcODProps> = ({
     () => initValues ?? createDefaultODFields(),
   );
 
-  const [output, setOutput] = useState<number>(0);
+  const [output, setOutput] = useState<CalcResult>({
+    resValue: 0,
+    resPercentage: 0,
+  });
 
   if (!id) {
     id = Date.now().toString();
@@ -216,9 +220,7 @@ export const CalcOD: FC<CalcODProps> = ({
               {!isShowPercentage ? '实际Hit' : '实际%'}
             </Label>
             <Label className="font-[600] text-base">
-              {!isShowPercentage
-                ? output
-                : `${((output / 40) * 100).toFixed(2)}%`}
+              {!isShowPercentage ? output.resValue : `${output.resPercentage}%`}
             </Label>
           </div>
           <div className="flex flex-col justify-end gap-[2px] min-w-max">
