@@ -74,8 +74,8 @@ export const CalcDR: FC<CalcDRProps> = ({
           <MdClose size={22} />
         </div>
       )}
-      <div className="flex flex-row w-full justify-between md:gap-4 gap-3">
-        <div className="flex flex-col gap-1 w-[88%]">
+      <div className="flex md:flex-row flex-col w-full gap-4">
+        <div className="flex flex-col gap-1 md:w-[88%]">
           <div className="flex flex-row justify-start gap-2">
             <div>
               <Label htmlFor={`skillDr-${id}`}>破坏倍率(DR)</Label>
@@ -195,18 +195,20 @@ export const CalcDR: FC<CalcDRProps> = ({
             </div>
           </div>
         </div>
-        <div className="flex flex-col items-center justify-center text-center min-w-max gap-2">
-          <div className="flex flex-col items-center w-full max-w-20 gap-1">
+        <div className="flex flex-row md:flex-col items-center justify-evenly text-center min-w-max gap-2">
+          <div className="flex flex-col items-center w-full max-w-32 md:max-w-20 gap-1">
             <Label className="font-[500] text-lg">实际DR</Label>
             <Label className="font-[600] text-base w-full">
               {output.resValue}
             </Label>
           </div>
-          <div className="flex flex-col items-center w-full max-w-20 gap-1">
+          <div className="flex flex-col md:flex-col-reverse items-center w-full max-w-32 md:max-w-20 gap-1">
+            <Label className="font-[500] text-lg md:text-base">
+              实际破坏率
+            </Label>
             <Label className="font-[600] text-base w-full">
               {output.resPercentage}%
             </Label>
-            <Label className="font-[500] text-base">实际破坏率</Label>
           </div>
         </div>
       </div>
