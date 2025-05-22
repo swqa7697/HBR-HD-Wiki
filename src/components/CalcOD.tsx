@@ -143,9 +143,9 @@ export const CalcOD: FC<CalcODProps> = ({
           </option>
         ))}
       </Select>
-      <div className="flex flex-row w-full justify-between md:gap-4 gap-3">
+      <div className="flex flex-row w-full justify-between gap-3">
         <div className="flex flex-col gap-1 w-[88%] mt-9">
-          <div className="flex flex-row justify-between gap-2">
+          <div className="flex flex-row justify-start gap-2">
             <div>
               <Label htmlFor={`hit-${id}`}>原始Hit</Label>
               <TextInput
@@ -256,7 +256,7 @@ export const CalcOD: FC<CalcODProps> = ({
         </div>
         <div className="flex flex-col items-center justify-between w-20">
           <div
-            className="flex flex-col items-center mt-5 w-full"
+            className="flex flex-col items-center text-center w-full max-w-[70px] mt-5"
             onClick={() => {
               if (setIsShowPercentage && isShowPercentage !== undefined) {
                 setIsShowPercentage(!isShowPercentage);
@@ -266,7 +266,7 @@ export const CalcOD: FC<CalcODProps> = ({
             <Label className="font-[500] text-lg">
               {!isShowPercentage ? '实际Hit' : '实际%'}
             </Label>
-            <Label className="font-[600] text-base w-full text-center mt-[22px] pb-3">
+            <Label className="font-[600] text-base w-full mt-[22px] pb-3">
               {!isShowPercentage ? output.resValue : `${output.resPercentage}%`}
             </Label>
           </div>

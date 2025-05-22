@@ -110,7 +110,7 @@ export const CalcDR: FC<CalcDRProps> = ({
                 name="earrings"
                 value={inputs.earrings}
                 onChange={handleInt}
-                className="w-[88px]"
+                className="w-20"
               >
                 {[0, 10, 12, 15].map((n) => (
                   <option key={n} value={n}>
@@ -126,7 +126,7 @@ export const CalcDR: FC<CalcDRProps> = ({
                 name="necklace"
                 value={inputs.necklace}
                 onChange={handleInt}
-                className="min-w-max max-w-24"
+                className="w-20"
               >
                 {[0, 10].map((n) => (
                   <option key={n} value={n}>
@@ -165,19 +165,17 @@ export const CalcDR: FC<CalcDRProps> = ({
             </div>
             <div>
               <Label htmlFor={`drBoost-${id}`}>破坏率上升</Label>
-              <Select
+              <TextInput
                 id={`drBoost-${id}`}
                 name="drBoost"
-                value={inputs.drBoost}
+                type="number"
+                sizing="md"
+                placeholder="0"
+                rightIcon={() => <p>%</p>}
+                value={inputs.drBoost > 0 ? inputs.drBoost : ''}
                 onChange={handleInt}
-                className="w-[88px]"
-              >
-                {[0, 30, 50, 80, 100, 130].map((n) => (
-                  <option key={n} value={n}>
-                    {n}%
-                  </option>
-                ))}
-              </Select>
+                className="w-20"
+              />
             </div>
             <div>
               <Label htmlFor={`targetDr-${id}`}>目标DR</Label>
@@ -186,7 +184,7 @@ export const CalcDR: FC<CalcDRProps> = ({
                 name="targetDr"
                 value={inputs.targetDr}
                 onChange={handleInt}
-                className="min-w-max max-w-24"
+                className="w-20"
               >
                 {Array.from({ length: 10 }, (_, i) => (
                   <option key={i + 1} value={i + 1}>
@@ -197,13 +195,15 @@ export const CalcDR: FC<CalcDRProps> = ({
             </div>
           </div>
         </div>
-        <div className="flex flex-col items-center justify-center gap-2 min-w-fit">
-          <div className="flex flex-col items-center gap-1 min-w-16">
+        <div className="flex flex-col items-center justify-center text-center min-w-max gap-2">
+          <div className="flex flex-col items-center w-full max-w-20 gap-1">
             <Label className="font-[500] text-lg">实际DR</Label>
-            <Label className="font-[600] text-base">{output.resValue}</Label>
+            <Label className="font-[600] text-base w-full">
+              {output.resValue}
+            </Label>
           </div>
-          <div className="flex flex-col items-center gap-1 min-w-16">
-            <Label className="font-[600] text-base">
+          <div className="flex flex-col items-center w-full max-w-20 gap-1">
+            <Label className="font-[600] text-base w-full">
               {output.resPercentage}%
             </Label>
             <Label className="font-[500] text-base">实际破坏率</Label>

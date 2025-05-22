@@ -68,7 +68,7 @@ export interface CalcFieldsDR {
   hit: number;
   hitCountUp_sm: number;
   hitCountUp_lg: number;
-  drBoost: 0 | 30 | 50 | 80 | 100 | 130; // %
+  drBoost: number; // %
   earrings: 0 | 10 | 12 | 15; // %
   necklace: 0 | 10; // %
   targetDr: 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10; // %
