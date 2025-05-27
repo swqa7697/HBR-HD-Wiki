@@ -6,16 +6,20 @@ import { base_title, home_title } from '../util/titles.json';
 
 const externalSites = [
   {
-    title: 'SeraphDB (HBR Quest)',
+    title: 'Seraph 数据库 (Quest)',
     url: 'https://hbr.quest',
   },
   {
-    title: 'HBR工具箱 (伤害计算器)',
+    title: 'HBR Tools (伤害计算器)',
     url: 'https://www.hbr-tool.com',
   },
   {
-    title: '战型统计表',
+    title: '战型(卡面)统计表',
     url: 'https://leprechaun-chtholly-nota-seniorious.github.io/HeavenBurnsRedStyleChart.html',
+  },
+  {
+    title: '美观轴图制作工具',
+    url: 'https://hbr-axletool.pages.dev',
   },
 ];
 
@@ -25,22 +29,27 @@ function Home() {
   }, []);
 
   return (
-    <div className="flex flex-1 md:flex-wrap w-full p-5 items-center justify-start flex-col md:flex-row gap-5">
+    <div className="flex flex-1 md:flex-wrap w-full p-4 items-center flex-col md:flex-row gap-4">
       {/* 资讯卡片 */}
       <CardImg_H imgSrc="/assets/stickers/1/499421694@2x.avif">
-        <p className="text-3xl">高难Wiki网页版上线啦!</p>
+        <p className="text-3xl">高难Wiki网页版上线啦~</p>
         <p className="text-2xl">
-          地址:{' '}
+          收藏地址 →{' '}
           <a
             href="https://wiki.hbr-hd.com"
             target="_blank"
             rel="noopener noreferrer"
-            className="text-amber-100"
+            className="text-amber-200"
           >
             wiki.hbr-hd.com
           </a>
         </p>
-        <p className="mt-2 text-xl">新鲜预览版，更多页面开发中...</p>
+        <p className="text-2xl text-sky-300 mt-2">
+          站内OD、DR计算器均已上线
+          <br />
+          欢迎使用！
+        </p>
+        <p className="text-xl mt-2">新鲜预览版，更多页面开发中...</p>
       </CardImg_H>
 
       {/* 站内实用工具 */}
