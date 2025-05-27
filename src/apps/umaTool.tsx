@@ -23,10 +23,13 @@ function UmaTool() {
 
   const [totalSP, setTotalSP] = useState<number>(0);
   const [skills, setSkills] = useState<Skill[]>([]);
+  const [remainedSP, setRemainedSP] = useState<number>(0);
   const [selectedSkills, setSelectedSkills] = useState<Set<string>>(new Set());
 
   useEffect(() => {
-    setSelectedSkills(selectSkills(totalSP, skills));
+    const { remainedSp, selected } = selectSkills(totalSP, skills);
+    setRemainedSP(remainedSp);
+    setSelectedSkills(selected);
   }, [totalSP, skills]);
 
   const handleSP = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -72,7 +75,7 @@ function UmaTool() {
       {/* Total SP */}
       <div className="flex items-center gap-3 mb-3">
         <Label htmlFor="totalSP" className="text-xl">
-          剩余SP
+          全部SP
         </Label>
         <TextInput
           id="totalSP"
@@ -83,6 +86,7 @@ function UmaTool() {
           onChange={handleSP}
           className="min-w-24 max-w-32"
         />
+        <div className="text-xl">剩余SP: {remainedSP}</div>
       </div>
       {/* Skills */}
       <div className="flex flex-col w-full h-full items-center overflow-y-auto scrollbar-hide">
@@ -116,13 +120,16 @@ function UmaTool() {
 
 export default UmaTool;
 
-const selectSkills = (totalSP: number, skills: Skill[]): Set<string> => {
+const selectSkills = (
+  totalSP: number,
+  skills: Skill[],
+): { remainedSp: number; selected: Set<string> } => {
   const selected: Set<string> = new Set();
 
   const totalCost = skills.reduce((sum, { cost }) => sum + cost, 0);
   if (totalCost <= totalSP) {
     skills.forEach((skill) => selected.add(skill.id));
-    return selected;
+    return { remainedSp: totalSP - totalCost, selected: selected };
   }
 
   const n = skills.length;
@@ -153,7 +160,7 @@ const selectSkills = (totalSP: number, skills: Skill[]): Set<string> => {
   }
 
   selectedArr.forEach((id) => selected.add(id));
-  return selected;
+  return { remainedSp: totalSP - dp[n][totalSP], selected: selected };
 };
 
 const getSkillScore = (isRare: boolean): number => {
