@@ -156,6 +156,7 @@ export const CalcOD: FC<CalcODProps> = ({
                 placeholder="0"
                 value={inputs.hit > 0 ? inputs.hit : ''}
                 onChange={handleInt}
+                onWheel={(e) => e.currentTarget.blur()}
                 className="min-w-12 max-w-24"
               />
             </div>
@@ -169,6 +170,7 @@ export const CalcOD: FC<CalcODProps> = ({
                 placeholder="0"
                 value={inputs.hitCountUp > 0 ? inputs.hitCountUp : ''}
                 onChange={handleInt}
+                onWheel={(e) => e.currentTarget.blur()}
                 className="min-w-12 max-w-24"
               />
             </div>
@@ -217,6 +219,7 @@ export const CalcOD: FC<CalcODProps> = ({
                 rightIcon={() => <p>%</p>}
                 value={inputs.fixedOD > 0 ? inputs.fixedOD : ''}
                 onChange={handleFloat}
+                onWheel={(e) => e.currentTarget.blur()}
                 className="min-w-12 max-w-24"
               />
             </div>
@@ -231,6 +234,7 @@ export const CalcOD: FC<CalcODProps> = ({
                 rightIcon={() => <p>%</p>}
                 value={inputs.otherBuff > 0 ? inputs.otherBuff : ''}
                 onChange={handleInt}
+                onWheel={(e) => e.currentTarget.blur()}
                 className="min-w-12 max-w-24"
               />
             </div>
@@ -249,6 +253,7 @@ export const CalcOD: FC<CalcODProps> = ({
                     : ''
                 }
                 onChange={handleODRate}
+                onWheel={(e) => e.currentTarget.blur()}
                 className="min-w-12 max-w-24"
               />
             </div>

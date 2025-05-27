@@ -84,7 +84,8 @@ function UmaTool() {
           placeholder="0"
           value={totalSP > 0 ? totalSP : ''}
           onChange={handleSP}
-          className="min-w-24 max-w-32"
+          onWheel={(e) => e.currentTarget.blur()}
+          className="w-20"
         />
         <div className="text-xl">剩余SP: {remainedSP}</div>
       </div>

@@ -87,6 +87,7 @@ export const CalcDR: FC<CalcDRProps> = ({
                 placeholder="0"
                 value={inputs.skillDr > 0 ? inputs.skillDr : ''}
                 onChange={handleFloat}
+                onWheel={(e) => e.currentTarget.blur()}
                 className="min-w-12 max-w-24"
               />
             </div>
@@ -100,6 +101,7 @@ export const CalcDR: FC<CalcDRProps> = ({
                 placeholder="0"
                 value={inputs.hit > 0 ? inputs.hit : ''}
                 onChange={handleInt}
+                onWheel={(e) => e.currentTarget.blur()}
                 className="min-w-12 max-w-24"
               />
             </div>
@@ -147,6 +149,7 @@ export const CalcDR: FC<CalcDRProps> = ({
                 placeholder="0"
                 value={inputs.hitCountUp_sm > 0 ? inputs.hitCountUp_sm : ''}
                 onChange={handleInt}
+                onWheel={(e) => e.currentTarget.blur()}
                 className="min-w-12 max-w-24"
               />
             </div>
@@ -160,6 +163,7 @@ export const CalcDR: FC<CalcDRProps> = ({
                 placeholder="0"
                 value={inputs.hitCountUp_lg > 0 ? inputs.hitCountUp_lg : ''}
                 onChange={handleInt}
+                onWheel={(e) => e.currentTarget.blur()}
                 className="min-w-12 max-w-24"
               />
             </div>
@@ -174,6 +178,7 @@ export const CalcDR: FC<CalcDRProps> = ({
                 rightIcon={() => <p>%</p>}
                 value={inputs.drBoost > 0 ? inputs.drBoost : ''}
                 onChange={handleInt}
+                onWheel={(e) => e.currentTarget.blur()}
                 className="w-20"
               />
             </div>

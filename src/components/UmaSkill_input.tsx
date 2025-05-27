@@ -54,6 +54,7 @@ export const UmaSkill: FC<UmaSkillProps> = ({ id, onChange, onRemove }) => {
             placeholder="0"
             value={cost > 0 ? cost : ''}
             onChange={handleCost}
+            onWheel={(e) => e.currentTarget.blur()}
             className="min-w-24 max-w-32"
           />
         </div>
