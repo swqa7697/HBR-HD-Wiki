@@ -63,7 +63,7 @@ function UmaTool() {
     <div className="flex flex-col w-full h-[97%] items-center justify-around overflow-hidden">
       {/* Header */}
       <h1 className="block text-3xl text-center [text-shadow:1px_1px_3px_gray] pt-5 pb-5">
-        恭喜来到里世界
+        欢迎来到里世界
         <br />
         赛马娘 技能计算器 (竞技场)
       </h1>
