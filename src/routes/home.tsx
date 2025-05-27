@@ -32,7 +32,7 @@ function Home() {
     <div className="flex flex-1 md:flex-wrap w-full p-4 items-center flex-col md:flex-row gap-4">
       {/* 资讯卡片 */}
       <CardImg_H imgSrc="/assets/stickers/1/499421694@2x.avif">
-        <p className="text-3xl">高难Wiki网页版上线啦~</p>
+        <p className="text-3xl pb-1">高难Wiki网页版上线啦~</p>
         <p className="text-2xl">
           收藏地址 →{' '}
           <a

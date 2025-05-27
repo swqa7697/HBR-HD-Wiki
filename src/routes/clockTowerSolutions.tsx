@@ -8,17 +8,16 @@ function ClockTowerSolutions() {
   }, []);
 
   return (
-    <div className="flex flex-1 md:flex-wrap w-full p-5 items-center justify-start flex-col md:flex-row gap-5">
+    <div className="flex flex-1 md:flex-wrap w-full p-4 items-center justify-center flex-col md:flex-row gap-4">
       <CardImg_H imgSrc="/assets/stickers/2/499421859@2x.avif">
         <div className="flex flex-col items-center text-center gap-2 text-2xl">
+          <p className="text-4xl">Hell钟楼解法</p>
           <p className="text-4xl text-amber-100 mb-3">
             <a
               href="https://docs.qq.com/sheet/DWEJKQ2JRUlZVU2hn"
               target="_blank"
               rel="noopener noreferrer"
             >
-              Hell钟楼解法
-              <br />
               →→ 文档版 ←←
             </a>
           </p>
