@@ -150,17 +150,21 @@ const selectSkills = (
     }
   }
 
-  const selectedArr: string[] = [];
+  const selectedArr: Skill[] = [];
   let j = totalSP;
   for (let i = n; i > 0; i--) {
     if (dp[i][j] !== dp[i - 1][j]) {
-      selectedArr.push(skills[i - 1].id);
+      selectedArr.push(skills[i - 1]);
       j -= skills[i - 1].cost;
     }
   }
 
-  selectedArr.forEach((id) => selected.add(id));
-  return { remainedSp: totalSP - dp[n][totalSP], selected: selected };
+  let selectedCost = 0;
+  selectedArr.forEach((skill) => {
+    selected.add(skill.id);
+    selectedCost += skill.cost;
+  });
+  return { remainedSp: totalSP - selectedCost, selected: selected };
 };
 
 const getSkillScore = (isRare: boolean): number => {
