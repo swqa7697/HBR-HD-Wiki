@@ -12,6 +12,9 @@ import ODTool from './apps/odTool';
 import DRTool from './apps/drTool';
 import NotFound from './routes/notFound';
 
+// Temporary
+import UmaTool from './apps/umaTool';
+
 import './index.css';
 
 createRoot(document.getElementById('root')!).render(
@@ -28,6 +31,8 @@ createRoot(document.getElementById('root')!).render(
           {/* Tools */}
           <Route path="od-tool" element={<ODTool />} />
           <Route path="dr-tool" element={<DRTool />} />
+          {/* Temporary */}
+          <Route path="uma-tool" element={<UmaTool />} />
         </Route>
         <Route path="*" element={<NotFound />} />
       </Routes>
