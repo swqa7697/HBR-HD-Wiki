@@ -93,6 +93,23 @@ function Home() {
           ))}
         </div>
       </CardImg_H>
+
+      {/* Tools使用指南 */}
+      <CardImg_H imgSrc="/assets/stickers/3/499421720@2x.avif">
+        <div className="flex flex-col items-center text-2xl gap-1">
+          <p className="font-bold">HBR Tools 使用指南</p>
+          <p>@Tommyovo</p>
+          <p className="text-amber-50">
+            <a
+              href="/assets/attachments/HBR_Tools_Manual.pdf"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              HBR Tools Manual.pdf
+            </a>
+          </p>
+        </div>
+      </CardImg_H>
     </div>
   );
 }
