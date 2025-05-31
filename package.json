@@ -12,6 +12,7 @@
   "dependencies": {
     "flowbite": "^2.5.2",
     "flowbite-react": "^0.10.2",
+    "mongoose": "^8.15.1",
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
     "react-router": "^7.6.0",
@@ -19,6 +20,7 @@
   },
   "devDependencies": {
     "@eslint/js": "^9.27.0",
+    "@types/mongoose": "^5.11.96",
     "@types/node": "^22.15.21",
     "@types/react": "^19.1.5",
     "@types/react-dom": "^19.1.5",
