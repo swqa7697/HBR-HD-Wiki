@@ -1,4 +1,4 @@
-import dbConnect from './_utils/dbConnect';
+import dbConnect from './_util/dbConnect';
 import Enemy from './_models/Enemy';
 
 // GET - Fetch all enemies or query by ID
