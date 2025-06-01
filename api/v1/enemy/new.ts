@@ -47,6 +47,7 @@ export const POST = async (request: Request) => {
       devastationRate,
       maxDR,
       odRate,
+      imageUrl,
       resistances,
     } = body;
 
@@ -60,6 +61,7 @@ export const POST = async (request: Request) => {
       devastationRate,
       maxDR,
       odRate: odRate || 100,
+      imageUrl: imageUrl || null,
       resistances: resistances || {
         fire: 0,
         ice: 0,

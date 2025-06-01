@@ -31,6 +31,7 @@ export function validateEnemyData(
     'devastationRate',
     'maxDR',
     'odRate',
+    'imageUrl', // Cloudinary image URL
     'resistances',
   ];
 
@@ -89,6 +90,27 @@ export function validateEnemyData(
       data.enemyName.trim().length === 0
     ) {
       errors.push('enemyName must be a non-empty string');
+    }
+  }
+
+  // Validate imageUrl
+  if (data.imageUrl !== undefined) {
+    if (typeof data.imageUrl !== 'string') {
+      errors.push('imageUrl must be a string');
+    } else if (data.imageUrl.trim().length > 0) {
+      // Only validate URL format if not empty
+      try {
+        new URL(data.imageUrl);
+        // Additional validation for Cloudinary URLs (optional)
+        if (
+          !data.imageUrl.includes('cloudinary.com') &&
+          !data.imageUrl.includes('res.cloudinary.com')
+        ) {
+          errors.push('imageUrl should be a valid Cloudinary URL');
+        }
+      } catch {
+        errors.push('imageUrl must be a valid URL');
+      }
     }
   }
 

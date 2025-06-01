@@ -9,6 +9,7 @@ export interface IEnemy extends Document {
   devastationRate: number;
   maxDR: number;
   odRate: number;
+  imageUrl?: string; // Cloudinary image URL
   resistances: {
     fire: number; // 火
     ice: number; // 冰
@@ -69,6 +70,10 @@ const EnemySchema: Schema<IEnemy> = new Schema({
     default: 100,
     min: 0,
     max: 100,
+  },
+  imageUrl: {
+    type: String,
+    trim: true,
   },
   resistances: {
     fire: {
