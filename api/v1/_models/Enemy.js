@@ -5,7 +5,7 @@ const EnemySchema = new Schema({
     // Full identifier name as ID. Check hbr.quest to get
     type: String,
     required: true,
-    unique: true,
+    index: true,
     trim: true,
   },
   enemyName: {
@@ -112,9 +112,6 @@ const EnemySchema = new Schema({
     },
   },
 });
-
-// Create index for custom enemyId field
-EnemySchema.index({ enemyId: 1 });
 
 const Enemy = mongoose.models.Enemy || mongoose.model('Enemy', EnemySchema);
 
