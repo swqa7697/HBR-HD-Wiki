@@ -1,17 +1,7 @@
-import mongoose, { Mongoose } from 'mongoose';
-
-interface GlobalMongoose {
-  conn: Mongoose | null;
-  promise: Promise<Mongoose> | null;
-}
-
-declare global {
-  // eslint-disable-next-line no-var
-  var mongooseCache: GlobalMongoose | undefined;
-}
+import mongoose from 'mongoose';
 
 // Global cache to avoid duplicate connections
-const cached: GlobalMongoose = global.mongooseCache || {
+const cached = global.mongooseCache || {
   conn: null,
   promise: null,
 };
@@ -20,7 +10,7 @@ if (!global.mongooseCache) {
   global.mongooseCache = cached;
 }
 
-async function dbConnect(): Promise<Mongoose> {
+async function dbConnect() {
   // Already connected
   if (cached.conn) {
     return cached.conn;
@@ -28,7 +18,7 @@ async function dbConnect(): Promise<Mongoose> {
 
   // If no promise exists, create new connection
   if (!cached.promise) {
-    const MONGODB_URI: string = process.env.MONGODB_URI as string;
+    const MONGODB_URI = process.env.MONGODB_URI;
 
     const options = {
       bufferCommands: false,

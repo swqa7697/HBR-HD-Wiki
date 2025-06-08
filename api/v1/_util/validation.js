@@ -1,25 +1,13 @@
 // Validation utilities for Enemy endpoints
 
-interface ValidationResult {
-  isValid: boolean;
-  errors: string[];
-  invalidFields?: string[];
-  allowedFields?: string[];
-}
-
-type EnemyData = Record<string, unknown>;
-
 /**
  * Validate enemy data for create or update operations
- * @param data - The data object to validate
- * @param isUpdate - Whether this is an update operation (false for create)
- * @returns ValidationResult object with validation status and errors
+ * @param {Object} data - The data object to validate
+ * @param {boolean} isUpdate - Whether this is an update operation (false for create)
+ * @returns {Object} ValidationResult object with validation status and errors
  */
-export function validateEnemyData(
-  data: EnemyData,
-  isUpdate: boolean = false,
-): ValidationResult {
-  const errors: string[] = [];
+export function validateEnemyData(data, isUpdate = false) {
+  const errors = [];
 
   // Field whitelist validation
   const allowedFields = [
@@ -176,7 +164,7 @@ export function validateEnemyData(
         'imprison',
       ];
 
-      const resistances = data.resistances as Record<string, unknown>;
+      const resistances = data.resistances;
       Object.keys(resistances).forEach((key) => {
         if (!validResistanceKeys.includes(key)) {
           errors.push(`Invalid resistance type: ${key}`);

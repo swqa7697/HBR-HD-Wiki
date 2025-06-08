@@ -3,7 +3,7 @@ import Enemy from '../_models/Enemy';
 import { validateEnemyData } from '../_util/validation';
 
 // POST /api/v1/enemy/new - Create new enemy
-export const POST = async (req: Request) => {
+export const POST = async (req) => {
   try {
     await dbConnect();
 
@@ -13,12 +13,7 @@ export const POST = async (req: Request) => {
     const validationResult = validateEnemyData(body, false); // isUpdate = false
 
     if (!validationResult.isValid) {
-      const errorResponse: {
-        error: string;
-        invalidFields?: string[];
-        allowedFields?: string[];
-        validationErrors?: string[];
-      } = {
+      const errorResponse = {
         error:
           validationResult.errors[0] === 'Invalid fields detected'
             ? 'Invalid fields detected'

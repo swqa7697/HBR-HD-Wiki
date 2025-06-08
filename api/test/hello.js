@@ -1,11 +1,11 @@
-export const GET = async (request: Request) => {
-  const url = new URL(request.url);
+export const GET = async (req) => {
+  const url = new URL(req.url);
   const name = url.searchParams.get('name') ?? 'World';
   return new Response(
     JSON.stringify({
       Message: `Hello ${name}!`,
-      Url: request.url,
-      Method: request.method,
+      Url: req.url,
+      Method: req.method,
     }),
     {
       status: 200,
@@ -16,12 +16,12 @@ export const GET = async (request: Request) => {
   );
 };
 
-export const POST = async (request: Request) => {
+export const POST = async (req) => {
   return new Response(
     JSON.stringify({
       Message: 'Hello World',
-      Url: request.url,
-      Method: request.method,
+      Url: req.url,
+      Method: req.method,
     }),
     {
       status: 200,

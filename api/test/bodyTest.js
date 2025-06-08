@@ -1,4 +1,4 @@
-export const POST = async (req: Request) => {
+export const POST = async (req) => {
   try {
     const { val = 'No Value' } = await req.json();
     return new Response(
