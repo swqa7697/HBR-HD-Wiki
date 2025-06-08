@@ -27,4 +27,6 @@ dist-ssr
 /.react-router/
 /build/
 
+# Vercel
 .vercel
+.env*.local

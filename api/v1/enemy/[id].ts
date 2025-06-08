@@ -3,13 +3,14 @@ import Enemy from '../_models/Enemy';
 import { validateEnemyData } from '../_util/validation';
 
 // GET /api/v1/enemy/[id] - Get enemy by enemyId
-export const GET = async (request: Request) => {
+export const GET = async (
+  req: Request,
+  context: { params: Promise<{ id: string }> },
+) => {
   try {
     await dbConnect();
 
-    const url = new URL(request.url);
-    const pathSegments = url.pathname.split('/');
-    const enemyId = pathSegments[pathSegments.length - 1]; // Extract enemyId from URL
+    const enemyId = await context.params;
 
     if (!enemyId) {
       return new Response(JSON.stringify({ error: 'Enemy ID is required' }), {
@@ -38,7 +39,7 @@ export const GET = async (request: Request) => {
       },
     );
   } catch (error) {
-    console.error(`${request.method} ${request.url} Error:`, error);
+    console.error(`${req.method} ${req.url} Error:`, error);
     return new Response(
       JSON.stringify({
         error: 'Failed to fetch enemy data',
@@ -50,13 +51,14 @@ export const GET = async (request: Request) => {
 };
 
 // PATCH /api/v1/enemy/[id] - Update enemy by enemyId
-export const PATCH = async (request: Request) => {
+export const PATCH = async (
+  req: Request,
+  { params }: { params: Promise<{ id: string }> },
+) => {
   try {
     await dbConnect();
 
-    const url = new URL(request.url);
-    const pathSegments = url.pathname.split('/');
-    const enemyId = pathSegments[pathSegments.length - 1]; // Extract enemyId from URL
+    const { id: enemyId } = await params;
 
     if (!enemyId) {
       return new Response(JSON.stringify({ error: 'Enemy ID is required' }), {
@@ -65,7 +67,7 @@ export const PATCH = async (request: Request) => {
       });
     }
 
-    const body = await request.json();
+    const body = await req.json();
     const updateData = { ...body };
 
     // Remove enemyId from update data to prevent changing the ID
@@ -131,7 +133,7 @@ export const PATCH = async (request: Request) => {
       },
     );
   } catch (error) {
-    console.error(`${request.method} ${request.url} Error:`, error);
+    console.error(`${req.method} ${req.url} Error:`, error);
 
     // Handle validation errors
     if (error instanceof Error && error.name === 'ValidationError') {
@@ -155,13 +157,14 @@ export const PATCH = async (request: Request) => {
 };
 
 // DELETE /api/v1/enemy/[id] - Delete enemy by enemyId
-export const DELETE = async (request: Request) => {
+export const DELETE = async (
+  req: Request,
+  { params }: { params: Promise<{ id: string }> },
+) => {
   try {
     await dbConnect();
 
-    const url = new URL(request.url);
-    const pathSegments = url.pathname.split('/');
-    const enemyId = pathSegments[pathSegments.length - 1]; // Extract enemyId from URL
+    const { id: enemyId } = await params;
 
     if (!enemyId) {
       return new Response(JSON.stringify({ error: 'Enemy ID is required' }), {
@@ -194,7 +197,7 @@ export const DELETE = async (request: Request) => {
       },
     );
   } catch (error) {
-    console.error(`${request.method} ${request.url} Error:`, error);
+    console.error(`${req.method} ${req.url} Error:`, error);
     return new Response(
       JSON.stringify({
         error: 'Failed to delete enemy',

@@ -3,11 +3,11 @@ import Enemy from '../_models/Enemy';
 import { validateEnemyData } from '../_util/validation';
 
 // POST /api/v1/enemy/new - Create new enemy
-export const POST = async (request: Request) => {
+export const POST = async (req: Request) => {
   try {
     await dbConnect();
 
-    const body = await request.json();
+    const body = await req.json();
 
     // Validate create data using validation module
     const validationResult = validateEnemyData(body, false); // isUpdate = false
@@ -92,7 +92,7 @@ export const POST = async (request: Request) => {
       },
     );
   } catch (error) {
-    console.error(`${request.method} ${request.url} Error:`, error);
+    console.error(`${req.method} ${req.url} Error:`, error);
 
     // Handle duplicate ID or name error
     if (error instanceof Error && error.message.includes('duplicate key')) {
